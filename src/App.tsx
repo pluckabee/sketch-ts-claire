@@ -1,7 +1,6 @@
 import React from "react";
-import "./App.css";
 import DocumentRoute from './components/documentRoute'
-import { DataProvider } from './contexts/GlobalDataContext'
+import { DataProvider } from './providers/appData.provider'
 import { Link, matchPath, useLocation } from 'react-router-dom'
 
 

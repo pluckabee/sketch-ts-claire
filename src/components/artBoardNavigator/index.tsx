@@ -35,10 +35,10 @@ const ArtboardNavigator: React.FC<ArtboardViewProps> = ({
   return (
     <>
       <Link to={`/document/${document.documentId}`}><Close /></Link>
-      <Breadcrumb/>
+      <Separator />
       <Link to={getBackLink(currentArtboard.artboardIndex, document)}><ArrowLeft /></Link>
       {currentArtboard.artboardIndex + 1}
-      <Separator />
+      <Breadcrumb/>
       {document.artboards.length}
       <Link to={getForwardLink(currentArtboard.artboardIndex, document)}><ArrowRight /></Link>
       <span>{currentArtboard.artboardName}</span>

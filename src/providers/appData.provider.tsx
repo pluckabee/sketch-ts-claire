@@ -1,7 +1,10 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getAllAppData } from "../services/allAppData";
-import { SketchDocument } from "../typeInterfaces";
 import { ErrorHandler } from "../services/errorHandler";
+import {
+  AppDataContextProps,
+  DataContext,
+} from "./appData.context";
 
 enum RequestStatuses {
   INITIAL = "INITIAL",
@@ -19,25 +22,6 @@ interface DataProviderProps {
   documentId: string;
 }
 
-interface AppDataContext {
-  hasError: boolean;
-  error?: Error;
-  isLoading: boolean;
-  noData: boolean;
-  appData?: SketchDocument;
-  documentId: string | null;
-}
-const DataContext = createContext<AppDataContext>({
-  documentId: null,
-  noData: false,
-  hasError: false,
-  error: undefined,
-  isLoading: true,
-  appData: undefined,
-});
-
-const useAppDataContext = () => useContext(DataContext);
-
 const DataProvider: React.FC<DataProviderProps> = ({
   documentId,
   children,
@@ -46,7 +30,8 @@ const DataProvider: React.FC<DataProviderProps> = ({
     status: RequestStatuses.INITIAL,
     documentId,
   });
-  const [appData, setAppData] = useState<AppDataContext["appData"]>(undefined);
+  const [appData, setAppData] =
+    useState<AppDataContextProps["appData"]>(undefined);
   const [error, setError] = useState<Error | undefined>(undefined);
 
   const isLoading =
@@ -70,7 +55,6 @@ const DataProvider: React.FC<DataProviderProps> = ({
       setDataRequestStatus({ status: RequestStatuses.PENDING, documentId });
       getAllAppData(documentId)
         .then((response) => {
-          console.log(response);
           setAppData(response);
           setDataRequestStatus({
             status: RequestStatuses.COMPLETE,
@@ -81,12 +65,11 @@ const DataProvider: React.FC<DataProviderProps> = ({
           setDataRequestStatus({ status: RequestStatuses.ERROR, documentId });
           setError(e);
           ErrorHandler(e);
-          console.log(e.message);
         });
     }
   }, [dataRequestStatus, documentId]);
 
-  const context: AppDataContext = {
+  const context: AppDataContextProps = {
     documentId,
     isLoading,
     hasError,
@@ -100,4 +83,4 @@ const DataProvider: React.FC<DataProviderProps> = ({
   );
 };
 
-export { DataProvider, useAppDataContext };
+export { DataProvider };

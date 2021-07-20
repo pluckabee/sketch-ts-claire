@@ -2,7 +2,7 @@ import React from "react";
 import ArtboardNavigator from "../artBoardNavigator"
 import DocumentList from "../documentList";
 import Artboard from "../artboard";
-import { useAppDataContext } from "../../contexts/GlobalDataContext";
+import { useAppDataContext } from "../../providers/appData.context";
 
 interface DocumentRouteProps {
   artboardId?: string 

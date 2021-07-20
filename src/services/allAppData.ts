@@ -3,8 +3,7 @@ import { getAllAppDataRawResponse } from "../typeInterfaces";
 import { dataNormaliser } from "./dataNormaliser";
 
 export const getAllAppData = (documentId?: string) => {
-
-  console.log(documentId, 'documentId')
+  
   return axios
   .post<getAllAppDataRawResponse>("https://graphql.sketch.cloud/api", {
     query: `
