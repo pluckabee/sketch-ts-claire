@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import DocumentRoute from './routes/DocumentRoute'
+import DocumentRoute from './components/documentRoute'
 import { DataProvider } from './contexts/GlobalDataContext'
 import { Link, matchPath, useLocation } from 'react-router-dom'
 
@@ -21,8 +21,6 @@ const artboardPath = matchPath(pathname, {
 }) as any;
 
 const artBoardId = decodeURI(artboardPath?.params?.artboardName);
-
-console.log(documentPath);
 
 if(documentPath?.params?.documentId) {
   return (
