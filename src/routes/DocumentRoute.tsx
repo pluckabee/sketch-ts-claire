@@ -1,7 +1,7 @@
 import React from "react";
 import ArtboardNavigator from "../components/artBoardNavigator"
-import DocumentView from "../components/documentView";
-import ArtboardView from "../components/artboardView";
+import DocumentList from "../components/documentList";
+import Artboard from "../components/artboard";
 import { useAppDataContext } from "../contexts/GlobalDataContext";
 
 interface DocumentRouteProps {
@@ -28,11 +28,11 @@ const DocumentRoute: React.FC<DocumentRouteProps> = ({artboardId}) => {
     if (currentArtboard) {
       return <>
       <ArtboardNavigator currentArtboard={currentArtboard} document={appData} />
-      <ArtboardView artboard={currentArtboard} />
+      <Artboard artboard={currentArtboard} />
       </>
     }
 
-    return <DocumentView document={appData} />;
+    return <DocumentList document={appData} />;
   }
 
   // this should never happen

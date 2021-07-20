@@ -1,4 +1,4 @@
-import { getLink, getBackLink, getForwardLink } from "./index";
+import { getBackLink, getForwardLink } from "./index";
 import { SketchArtboard, SketchDocument } from "../../typeInterfaces";
 
 describe("Get Arrow Link Navigation Helper", () => {
@@ -12,7 +12,7 @@ describe("Get Arrow Link Navigation Helper", () => {
   } as SketchArtboard;
   const mockArtboard2 = {
     artboardIndex: 2,
-    artboardName: "mockArtboard2",
+    artboardName: "mock Art board 2",
   } as SketchArtboard;
 
   const mockDocument = {
@@ -33,7 +33,7 @@ describe("Get Arrow Link Navigation Helper", () => {
 
     const result = getBackLink(mockCurrentArtboard.artboardIndex, mockDocument);
 
-    expect(result).toMatch(mockArtboard0.artboardName);
+    expect(result).toMatch(encodeURI(mockArtboard0.artboardName));
   });
 
 
@@ -50,7 +50,7 @@ describe("Get Arrow Link Navigation Helper", () => {
 
     const result = getForwardLink(mockCurrentArtboard.artboardIndex, mockDocument);
 
-    expect(result).toMatch(mockArtboard2.artboardName);
+    expect(result).toMatch(encodeURI(mockArtboard2.artboardName));
   });
 
 
