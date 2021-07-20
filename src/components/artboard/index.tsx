@@ -11,7 +11,7 @@ const ArtboardView: React.FC<ArtboardViewProps> = ({ artboard }) => {
       <img
         src={artboard.file.url}
         alt={`artboard file ${artboard.artboardName}`}
-      ></img>
+      />
     </main>
   );
 };
