@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { getAllAppData, SketchDocument } from "../services/allAppData";
-import { ErrorHandler} from "../services/errorHandler"
-import { noop } from 'lodash-es'
+import { getAllAppData } from "../services/allAppData";
+import { SketchDocument } from "../typeInterfaces";
+import { ErrorHandler } from "../services/errorHandler";
 
 enum RequestStatuses {
   INITIAL = "INITIAL",
@@ -10,51 +10,88 @@ enum RequestStatuses {
   ERROR = "ERROR",
 }
 
+interface RequestState {
+  status: RequestStatuses;
+  documentId: string | null;
+}
+
+interface DataProviderProps {
+  documentId: string;
+}
+
 interface AppDataContext {
-  requestStatus: RequestStatuses;
-  invalidateCurrentData: () => void
+  hasError: boolean;
+  error?: Error;
   isLoading: boolean;
-  appData: SketchDocument | undefined;
+  noData: boolean;
+  appData?: SketchDocument;
+  documentId: string | null;
 }
 const DataContext = createContext<AppDataContext>({
-  requestStatus: RequestStatuses.INITIAL,
+  documentId: null,
+  noData: false,
+  hasError: false,
+  error: undefined,
   isLoading: true,
-  invalidateCurrentData: noop,
   appData: undefined,
 });
 
 const useAppDataContext = () => useContext(DataContext);
 
-const DataProvider: React.FC = ({ children }) => {
-  const [dataRequestStatus, setDataRequestStatus] = useState<RequestStatuses>(
-    RequestStatuses.INITIAL
-  );
+const DataProvider: React.FC<DataProviderProps> = ({
+  documentId,
+  children,
+}) => {
+  const [dataRequestStatus, setDataRequestStatus] = useState<RequestState>({
+    status: RequestStatuses.INITIAL,
+    documentId,
+  });
   const [appData, setAppData] = useState<AppDataContext["appData"]>(undefined);
+  const [error, setError] = useState<Error | undefined>(undefined);
 
   const isLoading =
-    dataRequestStatus !== RequestStatuses.COMPLETE &&
-    dataRequestStatus !== RequestStatuses.ERROR;
+    dataRequestStatus.documentId !== documentId ||
+    (dataRequestStatus.status !== RequestStatuses.COMPLETE &&
+      dataRequestStatus.status !== RequestStatuses.ERROR);
 
+  const hasError =
+    dataRequestStatus.documentId === documentId &&
+    dataRequestStatus.status === RequestStatuses.ERROR;
+  const noData = !!error?.message.match("No data found")?.length;
+  useEffect(() => {
+    setDataRequestStatus({ status: RequestStatuses.INITIAL, documentId });
+  }, [documentId]);
 
   useEffect(() => {
-    const dataNeedsRequesting = dataRequestStatus === RequestStatuses.INITIAL;
+    const dataNeedsRequesting =
+      dataRequestStatus.status === RequestStatuses.INITIAL;
 
     if (dataNeedsRequesting) {
-      setDataRequestStatus(RequestStatuses.PENDING);
-      getAllAppData.then((response) => {
-        setAppData(response.data.share.version.document);
-        setDataRequestStatus(RequestStatuses.COMPLETE)
-      }).catch((e) => {
-        setDataRequestStatus(RequestStatuses.ERROR)
-        ErrorHandler(e)
-      });
+      setDataRequestStatus({ status: RequestStatuses.PENDING, documentId });
+      getAllAppData(documentId)
+        .then((response) => {
+          console.log(response);
+          setAppData(response);
+          setDataRequestStatus({
+            status: RequestStatuses.COMPLETE,
+            documentId,
+          });
+        })
+        .catch((e) => {
+          setDataRequestStatus({ status: RequestStatuses.ERROR, documentId });
+          setError(e);
+          ErrorHandler(e);
+          console.log(e.message);
+        });
     }
-  }, [dataRequestStatus]);
+  }, [dataRequestStatus, documentId]);
 
   const context: AppDataContext = {
-    requestStatus: dataRequestStatus,
-    invalidateCurrentData: () => setDataRequestStatus(RequestStatuses.INITIAL),
+    documentId,
     isLoading,
+    hasError,
+    noData,
+    error,
     appData,
   };
 

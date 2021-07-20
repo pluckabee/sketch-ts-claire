@@ -1,71 +1,48 @@
 import axios from "axios";
+import { getAllAppDataRawResponse } from "../typeInterfaces";
+import { dataNormaliser } from "./dataNormaliser";
 
-type SketchImage = {
-  height: number;
-  url: string;
-  width: number;
-};
+export const getAllAppData = (documentId?: string) => {
 
-export type SketchArtboardThumbnail = SketchImage;
-
-export interface SketchArtboardFile extends SketchImage {
-  scale: number;
-  thumbnails: SketchArtboardThumbnail[];
-}
-
-export interface SketchArtboard {
-  name: string;
-  isArtBoard: boolean;
-  files: SketchArtboardFile[];
-}
-
-export interface SketchDocument {
-  name: string;
-  artboard: {
-    entries: SketchArtboard[];
-  };
-}
-
-export interface getAllAppDataResponse {
-    share: {
-      identifier: string;
-      version: {
-        document: SketchDocument;
-      };
-    };
-}
-const query = `
-{
-  share(id: "e981971c-ff57-46dc-a932-a60dc1804992") {
-    identifier
-    version {
-      document {
-        name
-        artboards {
-          entries {
+  console.log(documentId, 'documentId')
+  return axios
+  .post<getAllAppDataRawResponse>("https://graphql.sketch.cloud/api", {
+    query: `
+    {
+      share(id: "${documentId}") {
+        identifier
+        version {
+          document {
             name
-            isArtboard
-            files {
-              url
-              height
-              width
-              scale
-              thumbnails {
-                url
-                height
-                width
+            artboards {
+              entries {
+                name
+                isArtboard
+                files {
+                  url
+                  height
+                  width
+                  scale
+                  thumbnails {
+                    url
+                    height
+                    width
+                  }
+                }
               }
             }
           }
         }
       }
+    }`
+  })
+  .then((response) => {
+    if(response.data.data) {
+      return dataNormaliser(response.data);
     }
-  }
-}`;
 
-export const getAllAppData = axios.post<getAllAppDataResponse>(
-  "https://graphql.sketch.cloud/api",
-  {
-    query,
-  }
-);
+    else {
+      throw new Error(`No data found for documentId: ${documentId}`)
+    }
+  })
+}
