@@ -1,13 +1,17 @@
 import React from "react";
 import { SketchArtboard, SketchDocument } from "../typeInterfaces";
-import { getBackLink, getForwardLink } from "../helpers/navigation/navigationHelpers";
-import { ReactComponent as Close } from "../assets/close.svg";
+import {
+  getBackLink,
+  getForwardLink,
+} from "../helpers/navigation/navigationHelpers";
+
 import { ReactComponent as ArrowLeft } from "../assets/arrow-left.svg";
 import { ReactComponent as ArrowRight } from "../assets/arrow-right.svg";
-import { ReactComponent as Separator } from "../assets/separator.svg";
+
 import { ReactComponent as Breadcrumb } from "../assets/breadcrumb.svg";
 import { useHistory } from "react-router-dom";
-import { Navigation, NavArrow, CloseButton } from "./_navigation";
+import { NavigationContainer } from "./_styled/navigationContainer";
+import { NavigationArrow } from "./_styled/navigationArrow";
 
 type ArtboardViewProps = {
   currentArtboard: SketchArtboard;
@@ -27,17 +31,8 @@ const ArtboardNavigator: React.FC<ArtboardViewProps> = ({
     sketchDocument
   );
   return (
-    <Navigation>
-      <CloseButton
-        aria-label={"Go back to Document View"}
-        onClick={() => {
-          history.push(`/document/${sketchDocument.documentId}`);
-        }}
-      >
-        <Close />
-      </CloseButton>
-      <Separator />
-      <NavArrow
+    <NavigationContainer>
+      <NavigationArrow
         aria-label={backLink ? "Go to Previous Page" : "Cannot go further back"}
         onClick={() => {
           if (backLink) {
@@ -47,13 +42,13 @@ const ArtboardNavigator: React.FC<ArtboardViewProps> = ({
         disabled={backLink === undefined}
       >
         <ArrowLeft />
-      </NavArrow>
+      </NavigationArrow>
       <span aria-label={`Current page is Page ${currentPage} of ${totalPages}`}>
         {currentPage}
       </span>
       <Breadcrumb />
       <span aria-label={`Total pages: ${totalPages}`}>{totalPages}</span>
-      <NavArrow
+      <NavigationArrow
         onClick={() => {
           if (forwardLink) history.push(forwardLink);
         }}
@@ -63,8 +58,8 @@ const ArtboardNavigator: React.FC<ArtboardViewProps> = ({
         disabled={forwardLink === undefined}
       >
         <ArrowRight />
-      </NavArrow>
-    </Navigation>
+      </NavigationArrow>
+    </NavigationContainer>
   );
 };
 

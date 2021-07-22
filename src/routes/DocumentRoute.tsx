@@ -1,7 +1,7 @@
 import React from "react";
 
 import { DocumentView } from "../components/DocumentView";
-import { ArtboardView } from "../components/ArtboadView";
+import { ArtboardView } from "../components/ArtboardView";
 import { DocumentChooserView } from "../components/DocumentChooserView";
 import { useAppDataContext } from "../providers/DocumentData.context";
 import { Switch, Route } from "react-router-dom";

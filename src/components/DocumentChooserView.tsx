@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Main } from "./_main";
+import { BaseMain } from "./_styled/baseMain";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import { HeadingMain } from "./HeadingMain";
-import { SubmitButton } from "./_submitButton";
+import { SubmitButton } from "./_styled/formSubmitButton";
 
 const NewDocumentForm = styled.form`
   display: grid;
@@ -50,7 +50,7 @@ const DocumentChooserView: React.FC<DocumentChooserViewProps> = ({
   };
 
   return (
-    <Main>
+    <BaseMain>
       <HeadingMain>Go to Document</HeadingMain>
       {withError && (
         <ErrorMessage>{`An error occurred with Document Id: ${erroredDocumentId}, try a new document`}</ErrorMessage>
@@ -66,7 +66,7 @@ const DocumentChooserView: React.FC<DocumentChooserViewProps> = ({
           Go to Document
         </SubmitButton>
       </NewDocumentForm>
-    </Main>
+    </BaseMain>
   );
 };
 export { DocumentChooserView };

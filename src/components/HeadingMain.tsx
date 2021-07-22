@@ -1,7 +1,7 @@
 import React from "react";
-import { Header } from "./_header";
-import { Heading } from "./_heading";
-import { Logo } from "./_logo";
+import { Header } from "./_styled/baseHeader";
+import { Heading } from "./_styled/baseHeaderHeading";
+import { Logo } from "./_styled/baseHeaderLogo";
 const HeadingMain: React.FC = ({ children }) => {
   return (
     <Header>

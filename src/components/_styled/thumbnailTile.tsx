@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import * as tokens from "../../_tokens";
 
-const Thumbnail = styled.div`
+const ThumbnailTile = styled.div`
   padding: ${tokens.baseSpacing}px;
   a {
     height: 100%;
@@ -21,15 +21,4 @@ const Thumbnail = styled.div`
   }
 `;
 
-const ThumbnailImg = styled.img`
-  align-self: center;
-  padding-top: 1rem;
-`;
-
-const ThumbnailTitle = styled.div`
-  align-self: end;
-  transition: font-weight 0.3s ease-in-out;
-  padding-bottom: 1rem;
-`;
-
-export { Thumbnail, ThumbnailImg, ThumbnailTitle };
+export { ThumbnailTile };

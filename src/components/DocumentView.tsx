@@ -1,8 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ArtboardList } from "./_artboardList";
-import { Thumbnail, ThumbnailImg, ThumbnailTitle } from "./_artboardThumbnail";
-import { Main } from "./_main";
+import { ViewList } from "./_styled/viewList";
+import { ThumbnailTile } from "./_styled/thumbnailTile";
+import { ThumbnailImage } from "./_styled/thumbnailImage";
+import { ThumbnailText } from "./_styled/thumbnailText";
+import { BaseMain } from "./_styled/baseMain";
 import { useAppDataContext } from "../providers/DocumentData.context";
 import { DocumentChooserView } from "./DocumentChooserView";
 import { HeadingMain } from "./HeadingMain";
@@ -11,26 +13,26 @@ const DocumentView: React.FC = () => {
   const { sketchDocument } = useAppDataContext();
   if (sketchDocument) {
     return (
-      <Main>
+      <BaseMain>
         <HeadingMain>{sketchDocument.documentName}</HeadingMain>
-        <ArtboardList>
+        <ViewList>
           {sketchDocument.artboards.map((artboard) => (
-            <Thumbnail key={artboard.artboardName}>
+            <ThumbnailTile key={artboard.artboardName}>
               <Link
                 to={`/document/${
                   sketchDocument.documentId
                 }/art-board/${encodeURI(artboard.artboardName)}`}
               >
-                <ThumbnailImg
+                <ThumbnailImage
                   src={artboard.thumbnail.url}
                   alt={`thumbnail for ${artboard.artboardName}`}
-                ></ThumbnailImg>
-                <ThumbnailTitle>{artboard.artboardName}</ThumbnailTitle>
+                ></ThumbnailImage>
+                <ThumbnailText>{artboard.artboardName}</ThumbnailText>
               </Link>
-            </Thumbnail>
+            </ThumbnailTile>
           ))}
-        </ArtboardList>
-      </Main>
+        </ViewList>
+      </BaseMain>
     );
   }
   // For Bad document/artboard Ids
