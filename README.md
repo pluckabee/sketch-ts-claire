@@ -117,3 +117,5 @@ Some of the code that wasn't asked for isn't split out as nicely as it could be,
 Error handling of a bad artboard id is the same as document id, although perhaps they should just be sent to the document main page
 
 More tests, I got a bit carried away with features
+
+The data normalisers and the data types should be in the same place probably...
