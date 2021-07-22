@@ -3,7 +3,19 @@ import { BaseMain } from "./_styled/baseMain";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import { HeadingMain } from "./HeadingMain";
-import { SubmitButton } from "./_styled/formSubmitButton";
+import * as tokens from "../_tokens";
+
+const SubmitButton = styled.button`
+  background-color: #fa6400;
+  border-radius: 2px;
+  padding: 16px 32px;
+  color: #ffffff;
+  &:hover {
+    background-color: #fb8332;
+    box-shadow: ${tokens.boxShadow};
+  }
+`;
+
 
 const NewDocumentForm = styled.form`
   display: grid;

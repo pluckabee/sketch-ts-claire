@@ -26,6 +26,16 @@ Decided to use create-react-app to quickly get started
 
 Decided to use typescript so I could spend less time debugging
 
+If you put in a dodgy docuemnt id or artboard id you should get redirected back to the document chooser
+
+Ive used a media query for the artboard heading to align it to the right to give the text more room to nto overflow onto the navigation
+
+I have put in a min width of 330px - a possible dangerous assumption
+
+Used css grid to align the grid, the text is aligned to the bottom while the images are centre aligned in theor own space in the list view
+
+Developed on a Mac using chrome - I cannot couch for how it looks elsewhere
+
 ### Structure
 Folder structure is split thusly
 
@@ -73,7 +83,7 @@ I have assumed a 1:1 relationship  (in practical terms, not data terms) betweeen
 I have noticed some inconsistencies in the naming of artboard vs artBoard. I have gone with artboard
 
 ### State Management
-I am using a provider that provides a datacontext and also gives us state to manage Loading, error and no data states
+I am using a provider that provides the document data and also gives us state to manage Loading, error and no data states
 
 I am using the url structure to manage the selected artboard. I find this gives us a consistent single source of truth than trying to store it in state and keep it synced up with our routing structure
 
@@ -87,7 +97,7 @@ It really depends on how flexible we need to be with the URL structure
 
 I added some tests for some particularly fiddly bits that could be difficult to just read
 
-### Not so good things
+### Things that could be improved
 The routing is really basic and not very extensible.
 
 I originally tried to use the react-router-dom Switch component but it was proving to be very messy looking and I couldn't get it to work with the provider pattern I wanted
@@ -96,3 +106,10 @@ Because of the way i've normalised the data we can't choose between thumbnails/f
 
 The mobile view text will start to overlap the navigation if it getstoo long
 
+Error handling and no data handling are managed the same way right now, errors should probably be managed by a dedicated error handler
+
+Some of the code that wasn't asked for isn't split out as nicely as it could be, i wanted to avoid having non asked for stuff in the main structure so it wouldn't confuse the brief and keep these as simply extra bits for ease of use
+
+Error handling of a bad artboard id is the same as document id, although perhaps they should just be sent to the document main page
+
+More tests, I got a bit carried away with features
