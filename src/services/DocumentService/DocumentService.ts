@@ -1,11 +1,11 @@
 import axios from "axios";
-import { getAllAppDataRawResponse } from "../typeInterfaces";
-import { dataNormaliser } from "./dataNormaliser";
+import { getDocumentDataRawResponse } from "../../typeInterfaces";
+import { dataNormaliser } from "./documentDataNormaliser";
 
-export const getAllAppData = (documentId?: string) => {
+export const getDocumentData = (documentId?: string) => {
   
   return axios
-  .post<getAllAppDataRawResponse>("https://graphql.sketch.cloud/api", {
+  .post<getDocumentDataRawResponse>("https://graphql.sketch.cloud/api", {
     query: `
     {
       share(id: "${documentId}") {

@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import { ArtboardList } from "../_artboardList";
 import { Thumbnail, ThumbnailImg, ThumbnailTitle } from "../_artboardThumbnail";
 import { Main } from "../_main";
-import { useAppDataContext } from "../../providers/appData.context";
-import NoDataView from "../documentChooserView";
-import MainHeading from "../mainHeading"
+import { useAppDataContext } from "../../providers/DocumentData.context";
+import { DocumentChooserView } from "../DocumentChooserView";
+import { MainHeading } from "../MainHeading";
 
 const DocumentView: React.FC = () => {
   const { sketchDocument } = useAppDataContext();
@@ -34,7 +34,7 @@ const DocumentView: React.FC = () => {
     );
   }
   // For Bad document/artboard Ids
-  return <NoDataView/>
+  return <DocumentChooserView />;
 };
 
-export default DocumentView;
+export { DocumentView };

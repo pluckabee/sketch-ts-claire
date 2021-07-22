@@ -2,19 +2,8 @@ import React, { useState } from "react";
 import { Main } from "../_main";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
-import MainHeading from "../mainHeading";
-import * as tokens from "../../_tokens";
-
-const SubmitButton = styled.button`
-  background-color: #fa6400;
-  border-radius: 2px;
-  padding: 16px 32px;
-  color: #ffffff;
-  &:hover {
-    background-color: #fb8332;
-    box-shadow: ${tokens.boxShadow};
-  }
-`;
+import { MainHeading } from "../MainHeading";
+import { SubmitButton } from "../_submitButton";
 
 const NewDocumentForm = styled.form`
   display: grid;
@@ -29,7 +18,23 @@ const DocumentIdInput = styled.input`
   padding: 16px 32px;
 `;
 
-function DocumentChooserView() {
+const ErrorMessage = styled.div`
+  color: red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+`;
+
+interface DocumentChooserViewProps {
+  withError?: boolean;
+  erroredDocumentId?: string;
+}
+
+const DocumentChooserView: React.FC<DocumentChooserViewProps> = ({
+  withError,
+  erroredDocumentId,
+}) => {
   const defaultDocumentId = "e981971c-ff57-46dc-a932-a60dc1804992";
   const history = useHistory();
 
@@ -46,7 +51,9 @@ function DocumentChooserView() {
   return (
     <Main>
       <MainHeading>Go to Document</MainHeading>
-
+      {withError && (
+        <ErrorMessage>{`An error occurred with Document Id: ${erroredDocumentId}, try a new document`}</ErrorMessage>
+      )}
       <NewDocumentForm onSubmit={handleSubmit}>
         <label>Document Guid:</label>
         <DocumentIdInput
@@ -55,11 +62,10 @@ function DocumentChooserView() {
           onChange={handleChange}
         />
         <SubmitButton type="submit" value="Submit">
-          {" "}
           Go to Document
         </SubmitButton>
       </NewDocumentForm>
     </Main>
   );
-}
-export default DocumentChooserView;
+};
+export { DocumentChooserView };

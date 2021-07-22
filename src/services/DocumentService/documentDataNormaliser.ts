@@ -1,9 +1,9 @@
 import {
-  getAllAppDataRawResponse,
+  getDocumentDataRawResponse,
   RawSketchArtboard,
   SketchDocument,
   SketchArtboardImage,
-} from "../typeInterfaces";
+} from "../../typeInterfaces";
 import { omit, sortBy } from "lodash-es";
 
 const getThumbnail = (artboard: RawSketchArtboard): SketchArtboardImage => {
@@ -27,7 +27,7 @@ const getFile = (artboard: RawSketchArtboard): SketchArtboardImage => {
 };
 
 const dataNormaliser = (
-  rawAppData: getAllAppDataRawResponse
+  rawAppData: getDocumentDataRawResponse
 ): SketchDocument => {
   const rawDocument = rawAppData.data.share.version.document;
   const normalisedArtboards = sortBy(rawDocument.artboards.entries).map((artboard, index) => {

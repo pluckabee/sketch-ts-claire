@@ -3,9 +3,9 @@ import { Header } from "../_header";
 import { Heading } from "../_heading";
 import { Main } from "../_main";
 import { ArtBoard } from "../_artboard";
-import ArtboardNavigator from "../artBoardNavigator";
-import { useAppDataContext } from "../../providers/appData.context";
-import NoDataView from "../documentChooserView";
+import { ArtboardNavigator } from "../ArtBoardNavigator/ArtBoardNavigator";
+import { useAppDataContext } from "../../providers/DocumentData.context";
+import { DocumentChooserView } from "../DocumentChooserView";
 
 const ArtboardView: React.FC = () => {
   const { sketchDocument, currentArtboard } = useAppDataContext();
@@ -30,7 +30,7 @@ const ArtboardView: React.FC = () => {
     );
   }
   // For Bad document/artboard Ids
-  return <NoDataView/>
+  return <DocumentChooserView />;
 };
 
-export default ArtboardView;
+export { ArtboardView };

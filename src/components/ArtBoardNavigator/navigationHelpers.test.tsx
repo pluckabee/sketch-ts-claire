@@ -1,4 +1,4 @@
-import { getBackLink, getForwardLink } from "./index";
+import { getBackLink, getForwardLink } from "./navigationHelpers";
 import { SketchArtboard, SketchDocument } from "../../typeInterfaces";
 
 describe("Get Arrow Link Navigation Helper", () => {

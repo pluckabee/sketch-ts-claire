@@ -13,21 +13,22 @@ const Thumbnail = styled.div`
     grid-template-columns: 1fr;
     color: #7b7b7b;
     border-radius: 0.25rem;
+    transition: box-shadow 0.3s ease-in-out;
     &:hover {
       font-weight: bold;
       color: #000000;
-      box-shadow: ${tokens.boxShadow}
+      box-shadow: ${tokens.boxShadow};
   }
 `;
 
 const ThumbnailImg = styled.img`
   align-self: center;
-  padding: 1rem;
-  padding-bottom: 0px;
+  padding-top: 1rem;
 `;
 
 const ThumbnailTitle = styled.div`
   align-self: end;
+  transition: font-weight 0.3s ease-in-out;
   padding-bottom: 1rem;
 `;
 

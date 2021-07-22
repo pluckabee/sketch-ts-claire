@@ -41,7 +41,7 @@ export interface RawSketchArtboard {
     }[]
   }
   
-  export interface getAllAppDataRawResponse {
+  export interface getDocumentDataRawResponse {
     data:{
       share: {
         identifier: string;

@@ -1,5 +1,6 @@
 import React from "react";
 import { SketchArtboard, SketchDocument } from "../../typeInterfaces";
+import { getBackLink, getForwardLink } from "./navigationHelpers";
 import { ReactComponent as Close } from "../../assets/close.svg";
 import { ReactComponent as ArrowLeft } from "../../assets/arrow-left.svg";
 import { ReactComponent as ArrowRight } from "../../assets/arrow-right.svg";
@@ -13,21 +14,6 @@ type ArtboardViewProps = {
   sketchDocument: SketchDocument;
 };
 
-export const getLink = (index: number, sketchDocument: SketchDocument) => {
-  if (index >= 0 && index <= sketchDocument.artboards.length - 1) {
-    return `/document/${sketchDocument.documentId}/art-board/${encodeURI(
-      sketchDocument.artboards[index].artboardName
-    )}`;
-  }
-};
-
-export const getBackLink = (index: number, document: SketchDocument) => {
-  return getLink(index - 1, document);
-};
-
-export const getForwardLink = (index: number, document: SketchDocument) => {
-  return getLink(index + 1, document);
-};
 const ArtboardNavigator: React.FC<ArtboardViewProps> = ({
   currentArtboard,
   sketchDocument,
@@ -82,4 +68,4 @@ const ArtboardNavigator: React.FC<ArtboardViewProps> = ({
   );
 };
 
-export default ArtboardNavigator;
+export { ArtboardNavigator };

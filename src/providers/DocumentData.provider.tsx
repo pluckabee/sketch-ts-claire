@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { getAllAppData } from "../services/allAppData";
-import { ErrorHandler } from "../services/errorHandler";
+import { getDocumentData } from "../services/DocumentService/DocumentService";
+import { ErrorHandler } from "../components/ErrorHandler";
 
 import {
   RequestStatuses,
@@ -8,7 +8,7 @@ import {
 import {
   AppDataContextProps,
   DataContext,
-} from "./appData.context";
+} from "./DocumentData.context";
 
 interface DataProviderProps {
   documentId: string;
@@ -37,6 +37,8 @@ const DataProvider: React.FC<DataProviderProps> = ({
     dataRequestStatus.documentId === documentId &&
     dataRequestStatus.status === RequestStatuses.ERROR;
   const noData = !!error?.message.match("No data found")?.length;
+
+  
   useEffect(() => {
     setDataRequestStatus({ status: RequestStatuses.INITIAL, documentId });
   }, [documentId]);
@@ -51,7 +53,7 @@ const DataProvider: React.FC<DataProviderProps> = ({
 
     if (dataNeedsRequesting) {
       setDataRequestStatus({ status: RequestStatuses.PENDING, documentId });
-      getAllAppData(documentId)
+      getDocumentData(documentId)
         .then((response) => {
           setAppData(response);
           setDataRequestStatus({
