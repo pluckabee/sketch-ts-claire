@@ -102,9 +102,7 @@ It really depends on how flexible we need to be with the URL structure
 I added some tests for some particularly fiddly bits that could be difficult to just read
 
 ### Things that could be improved
-The routing is really basic and not very extensible.
-
-I originally tried to use the react-router-dom Switch component but it was proving to be very messy looking and I couldn't get it to work with the provider pattern I wanted
+The routing is a little bit confusing with an index, a MainRoute and a DocumentRoute. There was probably a way to avoid the 3rd file but I got caught up in making sure i could do dependency injection for my provider
 
 Because of the way i've normalised the data we can't choose between thumbnails/file images. I would mitigate this by having a thumbnailSmall and a thumbnailLarge property on my SketchArtboard Interface, or possibly returning to an array and having a helpert to pick the correct one. Right now, everything is just scaling the biggets images so we are less performant than we could be
 
