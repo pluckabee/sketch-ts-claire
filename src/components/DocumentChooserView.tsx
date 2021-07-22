@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Main } from "../_main";
+import { Main } from "./_main";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
-import { MainHeading } from "../MainHeading";
-import { SubmitButton } from "../_submitButton";
+import { HeadingMain } from "./HeadingMain";
+import { SubmitButton } from "./_submitButton";
 
 const NewDocumentForm = styled.form`
   display: grid;
@@ -40,6 +40,7 @@ const DocumentChooserView: React.FC<DocumentChooserViewProps> = ({
 
   const [documentId, setDocumentId] = useState<string>(defaultDocumentId);
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    console.log(event)
     event.preventDefault();
     history.push(`/document/${documentId}`);
   };
@@ -50,7 +51,7 @@ const DocumentChooserView: React.FC<DocumentChooserViewProps> = ({
 
   return (
     <Main>
-      <MainHeading>Go to Document</MainHeading>
+      <HeadingMain>Go to Document</HeadingMain>
       {withError && (
         <ErrorMessage>{`An error occurred with Document Id: ${erroredDocumentId}, try a new document`}</ErrorMessage>
       )}

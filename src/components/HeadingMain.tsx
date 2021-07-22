@@ -1,8 +1,8 @@
 import React from "react";
-import { Header } from "../_header";
-import { Heading } from "../_heading";
-import { Logo } from "../_logo";
-const MainHeading: React.FC = ({ children }) => {
+import { Header } from "./_header";
+import { Heading } from "./_heading";
+import { Logo } from "./_logo";
+const HeadingMain: React.FC = ({ children }) => {
   return (
     <Header>
       <Logo
@@ -15,4 +15,4 @@ const MainHeading: React.FC = ({ children }) => {
   );
 };
 
-export { MainHeading };
+export { HeadingMain };

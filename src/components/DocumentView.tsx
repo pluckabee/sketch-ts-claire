@@ -1,18 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ArtboardList } from "../_artboardList";
-import { Thumbnail, ThumbnailImg, ThumbnailTitle } from "../_artboardThumbnail";
-import { Main } from "../_main";
-import { useAppDataContext } from "../../providers/DocumentData.context";
-import { DocumentChooserView } from "../DocumentChooserView";
-import { MainHeading } from "../MainHeading";
+import { ArtboardList } from "./_artboardList";
+import { Thumbnail, ThumbnailImg, ThumbnailTitle } from "./_artboardThumbnail";
+import { Main } from "./_main";
+import { useAppDataContext } from "../providers/DocumentData.context";
+import { DocumentChooserView } from "./DocumentChooserView";
+import { HeadingMain } from "./HeadingMain";
 
 const DocumentView: React.FC = () => {
   const { sketchDocument } = useAppDataContext();
   if (sketchDocument) {
     return (
       <Main>
-        <MainHeading>{sketchDocument.documentName}</MainHeading>
+        <HeadingMain>{sketchDocument.documentName}</HeadingMain>
         <ArtboardList>
           {sketchDocument.artboards.map((artboard) => (
             <Thumbnail key={artboard.artboardName}>

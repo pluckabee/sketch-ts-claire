@@ -1,13 +1,13 @@
 import React from "react";
-import { SketchArtboard, SketchDocument } from "../../typeInterfaces";
-import { getBackLink, getForwardLink } from "./navigationHelpers";
-import { ReactComponent as Close } from "../../assets/close.svg";
-import { ReactComponent as ArrowLeft } from "../../assets/arrow-left.svg";
-import { ReactComponent as ArrowRight } from "../../assets/arrow-right.svg";
-import { ReactComponent as Separator } from "../../assets/separator.svg";
-import { ReactComponent as Breadcrumb } from "../../assets/breadcrumb.svg";
+import { SketchArtboard, SketchDocument } from "../typeInterfaces";
+import { getBackLink, getForwardLink } from "../helpers/navigation/navigationHelpers";
+import { ReactComponent as Close } from "../assets/close.svg";
+import { ReactComponent as ArrowLeft } from "../assets/arrow-left.svg";
+import { ReactComponent as ArrowRight } from "../assets/arrow-right.svg";
+import { ReactComponent as Separator } from "../assets/separator.svg";
+import { ReactComponent as Breadcrumb } from "../assets/breadcrumb.svg";
 import { useHistory } from "react-router-dom";
-import { Navigation, NavArrow, CloseButton } from "../_navigation";
+import { Navigation, NavArrow, CloseButton } from "./_navigation";
 
 type ArtboardViewProps = {
   currentArtboard: SketchArtboard;

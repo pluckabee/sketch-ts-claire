@@ -1,11 +1,11 @@
 import React from "react";
-import { Header } from "../_header";
-import { Heading } from "../_heading";
-import { Main } from "../_main";
-import { ArtBoard } from "../_artboard";
-import { ArtboardNavigator } from "../ArtBoardNavigator/ArtBoardNavigator";
-import { useAppDataContext } from "../../providers/DocumentData.context";
-import { DocumentChooserView } from "../DocumentChooserView";
+import { Header } from "./_header";
+import { Heading } from "./_heading";
+import { Main } from "./_main";
+import { ArtBoard } from "./_artboard";
+import { ArtboardNavigator } from "./ArtBoardNavigator";
+import { useAppDataContext } from "../providers/DocumentData.context";
+import { DocumentChooserView } from "./DocumentChooserView";
 
 const ArtboardView: React.FC = () => {
   const { sketchDocument, currentArtboard } = useAppDataContext();

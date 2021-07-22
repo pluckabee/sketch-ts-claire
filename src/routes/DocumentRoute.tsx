@@ -1,17 +1,17 @@
 import React from "react";
 
 import { DocumentView } from "../components/DocumentView";
-import { ArtboardView } from "../components/ArtboardView/ArtboadView";
+import { ArtboardView } from "../components/ArtboadView";
 import { DocumentChooserView } from "../components/DocumentChooserView";
 import { useAppDataContext } from "../providers/DocumentData.context";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import Loader from "../components/Loader";
 
 interface DocumentRouteProps {
   artboardId?: string;
 }
 const DocumentRoute: React.FC<DocumentRouteProps> = () => {
-  const { documentId, dataRequestStatus, noData, isLoading, hasError } =
+  const { documentId, dataRequestStatus, isLoading, hasError } =
     useAppDataContext();
   if (isLoading || documentId !== dataRequestStatus.documentId) {
     return <Loader />;
@@ -25,7 +25,6 @@ const DocumentRoute: React.FC<DocumentRouteProps> = () => {
 
   return (
     <Switch>
-      {noData && <Redirect to="/document" />}
       <Route exact path="/document/:documentId">
         <DocumentView />
       </Route>

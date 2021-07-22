@@ -1,5 +1,5 @@
 import React from "react";
-import { ReactComponent as Logo } from "../../assets/sketch-logo.svg";
+import { ReactComponent as Logo } from "../assets/sketch-logo.svg";
 import styled, { keyframes } from "styled-components";
 
 const pointUpDown = keyframes`
