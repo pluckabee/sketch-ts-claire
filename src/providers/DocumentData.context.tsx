@@ -4,7 +4,7 @@ import {
   SketchDocument,
   SketchArtboard,
   RequestStatuses,
-} from "../typeInterfaces";
+} from "../types";
 
 export interface AppDataContextProps {
   dataRequestStatus: {

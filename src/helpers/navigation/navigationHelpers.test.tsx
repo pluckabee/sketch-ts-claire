@@ -1,5 +1,5 @@
 import { getBackLink, getForwardLink } from "./navigationHelpers";
-import { SketchArtboard, SketchDocument } from "../../typeInterfaces";
+import { SketchArtboard, SketchDocument } from "../../types";
 
 describe("Get Arrow Link Navigation Helper", () => {
   const mockArtboard0 = {

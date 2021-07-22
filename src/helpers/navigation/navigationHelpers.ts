@@ -1,4 +1,4 @@
-import { SketchDocument } from "../../typeInterfaces";
+import { SketchDocument } from "../../types";
 
 export const getLink = (index: number, sketchDocument: SketchDocument) => {
   if (index >= 0 && index <= sketchDocument.artboards.length - 1) {

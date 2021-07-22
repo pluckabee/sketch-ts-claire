@@ -20,12 +20,6 @@ Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
 ## Decisions
 
 Decided to use create-react-app to quickly get started
@@ -36,12 +30,36 @@ Decided to use typescript so I could spend less time debugging
 Folder structure is split thusly
 
 assets - the image assets provided for the test
-components - all the react components bar the container and base routing components. Non logic components that could be shared are prefixed with an underscore
+components - all the react components
+components/_styled all of the logicless styled components
 providers - contexts and providers to manage the shared state
+routes - the routing components
 services - connections to the database and helpers
-typeInterfaces - all the types and interfaces for the app
+types - all the types and interfaces for the app
 
 I have tried to use dependencyInjection where ever possible for components that have a lot of logic to test. This should make it easier and not have to mock out as many imports
+
+I have used named import that match the file names of the components - I just find this much easier to manage when developing. Easier to find things when things and and files have specific names that match up rather than using the index exporting pattern. There is one expection here for types, this didn't feel big enough yet to split out
+
+### Urls structure
+
+The main views
+/document/:documentId
+/document/:documentId/art-board/:artboardName[encoded]
+
+For easy navigation/debugging there are also:
+/
+/document
+
+Which will take you to a form where you can easily paste in document guids if thats easier than using the url, it is autofilled with the original guid given in the test
+
+and 
+
+/loader
+
+if you want to have a look at the loader 
+
+
 
 ### Data Management
 I used axios to post to the graphQL endpoint to get the data and I have typed the Raw Data
@@ -63,6 +81,8 @@ although now That I'm writing that out, it does somewhat tie us into the existin
 
 It really depends on how flexible we need to be with the URL structure
 
+
+
 ### Tests
 
 I added some tests for some particularly fiddly bits that could be difficult to just read
@@ -72,6 +92,7 @@ The routing is really basic and not very extensible.
 
 I originally tried to use the react-router-dom Switch component but it was proving to be very messy looking and I couldn't get it to work with the provider pattern I wanted
 
-Because of the way i've normalised the data we can't choose between thumbnails/file images. I would mitigate this by having a thumbnailSmall and a thumbnailLarge property on my SketchArtboard Interface, or possibly returning to an array and having a helpert to pick the correct one. Right now, everything is just scaling so we are less performant than we could be
+Because of the way i've normalised the data we can't choose between thumbnails/file images. I would mitigate this by having a thumbnailSmall and a thumbnailLarge property on my SketchArtboard Interface, or possibly returning to an array and having a helpert to pick the correct one. Right now, everything is just scaling the biggets images so we are less performant than we could be
 
+The mobile view text will start to overlap the navigation if it getstoo long
 

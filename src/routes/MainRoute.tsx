@@ -32,7 +32,7 @@ const MainRoute: React.FC = () => {
           <DocumentRoute />
         </DataProvider>
       </Route>
-      <Route path="/loading">
+      <Route path="/loader">
         <Loader />;
       </Route>
       <Route path="/">

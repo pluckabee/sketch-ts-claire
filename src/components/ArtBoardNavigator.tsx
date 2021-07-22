@@ -1,5 +1,5 @@
 import React from "react";
-import { SketchArtboard, SketchDocument } from "../typeInterfaces";
+import { SketchArtboard, SketchDocument } from "../types";
 import {
   getBackLink,
   getForwardLink,

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getDocumentDataRawResponse } from "../../typeInterfaces";
+import { getDocumentDataRawResponse } from "../../types";
 import { dataNormaliser } from "./documentDataNormaliser";
 
 export const getDocumentData = (documentId?: string) => {

@@ -4,7 +4,7 @@ import { ErrorHandler } from "../components/ErrorHandler";
 
 import {
   RequestStatuses,
-} from "../typeInterfaces";
+} from "../types";
 import {
   AppDataContextProps,
   DataContext,

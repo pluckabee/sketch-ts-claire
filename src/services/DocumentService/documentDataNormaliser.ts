@@ -3,7 +3,7 @@ import {
   RawSketchArtboard,
   SketchDocument,
   SketchArtboardImage,
-} from "../../typeInterfaces";
+} from "../../types";
 import { omit, sortBy } from "lodash-es";
 
 const getThumbnail = (artboard: RawSketchArtboard): SketchArtboardImage => {
