@@ -16,7 +16,6 @@ export interface AppDataContextProps {
   currentArtboardId?: string;
   error?: Error;
   isLoading: boolean;
-  noData: boolean;
   sketchDocument?: SketchDocument;
   documentId: string;
 }
@@ -28,7 +27,6 @@ export const DataContext = createContext<AppDataContextProps>({
   },
   documentId: "",
   currentArtboardId: "",
-  noData: false,
   hasError: false,
   error: undefined,
   isLoading: true,

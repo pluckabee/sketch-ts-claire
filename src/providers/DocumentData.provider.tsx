@@ -36,7 +36,6 @@ const DataProvider: React.FC<DataProviderProps> = ({
   const hasError =
     dataRequestStatus.documentId === documentId &&
     dataRequestStatus.status === RequestStatuses.ERROR;
-  const noData = !!error?.message.match("No data found")?.length;
 
   
   useEffect(() => {
@@ -76,7 +75,6 @@ const DataProvider: React.FC<DataProviderProps> = ({
     currentArtboardId: artboardId,
     isLoading,
     hasError,
-    noData,
     error,
     sketchDocument,
   };
