@@ -1,37 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { getAllAppData } from "../services/allAppData";
 import { ErrorHandler } from "../services/errorHandler";
+
+import {
+  RequestStatuses,
+} from "../typeInterfaces";
 import {
   AppDataContextProps,
   DataContext,
 } from "./appData.context";
 
-enum RequestStatuses {
-  INITIAL = "INITIAL",
-  PENDING = "PENDING",
-  COMPLETE = "COMPLETE",
-  ERROR = "ERROR",
-}
-
-interface RequestState {
-  status: RequestStatuses;
-  documentId: string | null;
-}
-
 interface DataProviderProps {
   documentId: string;
+  artboardId?: string;
 }
 
 const DataProvider: React.FC<DataProviderProps> = ({
   documentId,
+  artboardId,
   children,
 }) => {
-  const [dataRequestStatus, setDataRequestStatus] = useState<RequestState>({
+  const [dataRequestStatus, setDataRequestStatus] = useState<AppDataContextProps['dataRequestStatus']>({
     status: RequestStatuses.INITIAL,
     documentId,
   });
-  const [appData, setAppData] =
-    useState<AppDataContextProps["appData"]>(undefined);
+  const [sketchDocument, setAppData] =
+    useState<AppDataContextProps["sketchDocument"]>(undefined);
   const [error, setError] = useState<Error | undefined>(undefined);
 
   const isLoading =
@@ -46,6 +40,10 @@ const DataProvider: React.FC<DataProviderProps> = ({
   useEffect(() => {
     setDataRequestStatus({ status: RequestStatuses.INITIAL, documentId });
   }, [documentId]);
+
+  const currentArtboard = sketchDocument?.artboards.find(
+    (board) => board.artboardName === artboardId
+  );
 
   useEffect(() => {
     const dataNeedsRequesting =
@@ -70,12 +68,15 @@ const DataProvider: React.FC<DataProviderProps> = ({
   }, [dataRequestStatus, documentId]);
 
   const context: AppDataContextProps = {
+    dataRequestStatus,
     documentId,
+    currentArtboard,
+    currentArtboardId: artboardId,
     isLoading,
     hasError,
     noData,
     error,
-    appData,
+    sketchDocument,
   };
 
   return (

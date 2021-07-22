@@ -1,19 +1,26 @@
 import React from "react";
-import ArtboardNavigator from "../artBoardNavigator"
-import DocumentList from "../documentList";
-import Artboard from "../artboard";
+
+import DocumentView from "../documentView";
+import ArtboardView from "../artboardView";
 import { useAppDataContext } from "../../providers/appData.context";
+import { Switch, Route } from "react-router-dom";
 
 interface DocumentRouteProps {
-  artboardId?: string 
+  artboardId?: string;
 }
-const DocumentRoute: React.FC<DocumentRouteProps> = ({artboardId}) => {
-  const { documentId, noData, appData, isLoading, hasError } = useAppDataContext();
-  if (isLoading || documentId !== appData?.documentId) {
+const DocumentRoute: React.FC<DocumentRouteProps> = () => {
+  const {
+    documentId,
+    dataRequestStatus,
+    noData,
+    isLoading,
+    hasError,
+  } = useAppDataContext();
+  if (isLoading || documentId !== dataRequestStatus.documentId) {
     return <div>Loading ...</div>;
   }
 
-  if(noData) {
+  if (noData) {
     return <div>No data found for document: {documentId}</div>;
   }
 
@@ -21,22 +28,16 @@ const DocumentRoute: React.FC<DocumentRouteProps> = ({artboardId}) => {
     return <div>Error</div>;
   }
 
-  if (appData) {
-    const currentArtboard = appData.artboards.find(
-      (board) => board.artboardName === artboardId
-    );
-    if (currentArtboard) {
-      return <>
-      <ArtboardNavigator currentArtboard={currentArtboard} document={appData} />
-      <Artboard artboard={currentArtboard} />
-      </>
-    }
-
-    return <DocumentList document={appData} />;
-  }
-
-  // this should never happen
-  return null;
-}
+  return (
+    <Switch>
+      <Route exact path="/document/:documentId">
+        <DocumentView />
+      </Route>
+      <Route path="/document/:documentId/art-board/:artBoardId">
+        <ArtboardView />
+      </Route>
+    </Switch>
+  );
+};
 
 export default DocumentRoute;

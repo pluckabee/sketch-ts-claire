@@ -1,28 +1,39 @@
-import  { createContext, useContext } from "react";
+import { createContext, useContext } from "react";
 
-import { SketchDocument } from "../typeInterfaces";
-
-
+import {
+  SketchDocument,
+  SketchArtboard,
+  RequestStatuses,
+} from "../typeInterfaces";
 
 export interface AppDataContextProps {
-    hasError: boolean;
-    error?: Error;
-    isLoading: boolean;
-    noData: boolean;
-    appData?: SketchDocument;
-    documentId: string | null;
-  }
+  dataRequestStatus: {
+    documentId: string;
+    status: RequestStatuses;
+  };
+  hasError: boolean;
+  currentArtboard?: SketchArtboard;
+  currentArtboardId?: string;
+  error?: Error;
+  isLoading: boolean;
+  noData: boolean;
+  sketchDocument?: SketchDocument;
+  documentId: string;
+}
 
-
-export   const DataContext = createContext<AppDataContextProps>({
-    documentId: null,
-    noData: false,
-    hasError: false,
-    error: undefined,
-    isLoading: true,
-    appData: undefined,
-  });
-  
-
+export const DataContext = createContext<AppDataContextProps>({
+  dataRequestStatus: {
+    documentId: "",
+    status: RequestStatuses.INITIAL,
+  },
+  documentId: "",
+  currentArtboardId: "",
+  noData: false,
+  hasError: false,
+  error: undefined,
+  isLoading: true,
+  sketchDocument: undefined,
+  currentArtboard: undefined,
+});
 
 export const useAppDataContext = () => useContext(DataContext);

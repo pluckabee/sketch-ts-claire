@@ -1,3 +1,11 @@
+
+export enum RequestStatuses {
+  INITIAL = "INITIAL",
+  PENDING = "PENDING",
+  COMPLETE = "COMPLETE",
+  ERROR = "ERROR",
+}
+
 export type SketchArtboardImage = {
   height: number;
   url: string;

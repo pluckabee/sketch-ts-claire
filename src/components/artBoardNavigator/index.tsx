@@ -5,44 +5,80 @@ import { ReactComponent as ArrowLeft } from "../../assets/arrow-left.svg";
 import { ReactComponent as ArrowRight } from "../../assets/arrow-right.svg";
 import { ReactComponent as Separator } from "../../assets/separator.svg";
 import { ReactComponent as Breadcrumb } from "../../assets/breadcrumb.svg";
-import { Link} from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { Navigation, NavArrow, CloseButton } from "../_navigation";
 
 type ArtboardViewProps = {
   currentArtboard: SketchArtboard;
-  document: SketchDocument;
+  sketchDocument: SketchDocument;
 };
 
-export const getLink = (index: number, document: SketchDocument ) => {
-    if(index >= 0 && index <= (document.artboards.length -1)) {
-        return `/document/${document.documentId}/art-board/${encodeURI(document.artboards[index].artboardName)}`
-    }
-    return '#'
-}
+export const getLink = (index: number, sketchDocument: SketchDocument) => {
+  if (index >= 0 && index <= sketchDocument.artboards.length - 1) {
+    return `/document/${sketchDocument.documentId}/art-board/${encodeURI(
+      sketchDocument.artboards[index].artboardName
+    )}`;
+  }
+};
 
-export const getBackLink = (index: number, document: SketchDocument )=> {
-    return getLink(index -1, document)
+export const getBackLink = (index: number, document: SketchDocument) => {
+  return getLink(index - 1, document);
+};
 
-}
-
-export const getForwardLink = (index: number, document: SketchDocument )=> {
-    return getLink(index +1, document)
-
-}
+export const getForwardLink = (index: number, document: SketchDocument) => {
+  return getLink(index + 1, document);
+};
 const ArtboardNavigator: React.FC<ArtboardViewProps> = ({
   currentArtboard,
-  document,
+  sketchDocument,
 }) => {
+  const history = useHistory();
+  const currentPage = currentArtboard.artboardIndex + 1;
+  const totalPages = sketchDocument.artboards.length;
+  const backLink = getBackLink(currentArtboard.artboardIndex, sketchDocument);
+  const forwardLink = getForwardLink(
+    currentArtboard.artboardIndex,
+    sketchDocument
+  );
   return (
-    <>
-      <Link to={`/document/${document.documentId}`}><Close /></Link>
+    <Navigation>
+      <CloseButton
+        aria-label={"Go back to Document View"}
+        onClick={() => {
+          history.push(`/document/${sketchDocument.documentId}`);
+        }}
+      >
+        <Close />
+      </CloseButton>
       <Separator />
-      <Link to={getBackLink(currentArtboard.artboardIndex, document)}><ArrowLeft /></Link>
-      {currentArtboard.artboardIndex + 1}
-      <Breadcrumb/>
-      {document.artboards.length}
-      <Link to={getForwardLink(currentArtboard.artboardIndex, document)}><ArrowRight /></Link>
-      <span>{currentArtboard.artboardName}</span>
-    </>
+      <NavArrow
+        aria-label={backLink ? "Go to Previous Page" : "Cannot go further back"}
+        onClick={() => {
+          if (backLink) {
+            history.push(backLink);
+          }
+        }}
+        disabled={backLink === undefined}
+      >
+        <ArrowLeft />
+      </NavArrow>
+      <span aria-label={`Current page is Page ${currentPage} of ${totalPages}`}>
+        {currentPage}
+      </span>
+      <Breadcrumb />
+      <span aria-label={`Total pages: ${totalPages}`}>{totalPages}</span>
+      <NavArrow
+        onClick={() => {
+          if (forwardLink) history.push(forwardLink);
+        }}
+        aria-label={
+          forwardLink ? "Go to Next Page" : "Cannot go further forward"
+        }
+        disabled={forwardLink === undefined}
+      >
+        <ArrowRight />
+      </NavArrow>
+    </Navigation>
   );
 };
 
