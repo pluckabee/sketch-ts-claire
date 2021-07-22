@@ -36,6 +36,10 @@ Used css grid to align the grid, the text is aligned to the bottom while the ima
 
 Developed on a Mac using chrome - I cannot couch for how it looks elsewhere
 
+Added a tokens file to share some of the sizes to keep consistency
+
+Extracted out box-shadow for easier readability
+
 ### Structure
 Folder structure is split thusly
 
