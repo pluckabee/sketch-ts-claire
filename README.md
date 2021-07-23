@@ -1,6 +1,9 @@
 # Claire Patterson Sketch FE Test
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Run the application
+ run `yarn install` to install dependencies
+ follow instructions for `yarn start` below
 
 ## Available Scripts
 
