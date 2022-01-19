@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const NavigationContainer = styled.nav`
+  z-index: 99;
   align-items: center;
   justify-items: center;
   display: grid;
