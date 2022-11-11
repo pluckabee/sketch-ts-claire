@@ -29,15 +29,15 @@ Decided to use create-react-app to quickly get started
 
 Decided to use typescript so I could spend less time debugging
 
-If you put in a dodgy docuemnt id or artboard id you should get redirected back to the document chooser
+If you put in a dodgy document id or artboard id you should get redirected back to the document chooser
 
-Ive used a media query for the artboard heading to align it to the right to give the text more room to nto overflow onto the navigation
+Ive used a media query for the artboard heading to align it to the right to give the text more room to not overflow onto the navigation
 
-I have put in a min width of 330px - a possible dangerous assumption
+I have put in a min width of 330px - an assumption I would need to verify
 
-Used css grid to align the grid, the text is aligned to the bottom while the images are centre aligned in theor own space in the list view
+Used css grid to align the grid, the text is aligned to the bottom while the images are centre aligned in their own space in the list view
 
-Developed on a Mac using chrome - I cannot couch for how it looks elsewhere
+Developed on a Mac using chrome - I cannot vouch for how it looks elsewhere
 
 Added a tokens file to share some of the sizes to keep consistency
 
@@ -54,7 +54,7 @@ routes - the routing components
 services - connections to the database and helpers
 types - all the types and interfaces for the app
 
-I have tried to use dependencyInjection where ever possible for components that have a lot of logic to test. This should make it easier and not have to mock out as many imports
+I have tried to use dependency injection where ever possible for components that have a lot of logic to test. This should make it easier and not have to mock out as many imports
 
 I have used named import that match the file names of the components - I just find this much easier to manage when developing. Easier to find things when things and and files have specific names that match up rather than using the index exporting pattern. There is one expection here for types, this didn't feel big enough yet to split out
 
@@ -105,18 +105,18 @@ It really depends on how flexible we need to be with the URL structure
 I added some tests for some particularly fiddly bits that could be difficult to just read
 
 ### Things that could be improved
-The routing is a little bit confusing with an index, a MainRoute and a DocumentRoute. There was probably a way to avoid the 3rd file but I got caught up in making sure i could do dependency injection for my provider
+The routing is a little bit confusing with an index, a MainRoute and a DocumentRoute. There was probably a way to avoid the 3rd file but I got caught up in making sure I could do dependency injection for my provider
 
-Because of the way i've normalised the data we can't choose between thumbnails/file images. I would mitigate this by having a thumbnailSmall and a thumbnailLarge property on my SketchArtboard Interface, or possibly returning to an array and having a helpert to pick the correct one. Right now, everything is just scaling the biggets images so we are less performant than we could be
+Because of the way i've normalised the data we can't choose between thumbnails/file images. I would mitigate this by having a thumbnailSmall and a thumbnailLarge property on my SketchArtboard Interface, or possibly returning to an array and having a helper to pick the correct one. Right now, everything is just scaling the biggest images so we are less performant than we could be
 
-The mobile view text will start to overlap the navigation if it getstoo long
+The mobile view text will start to overlap the navigation if it gets too long
 
 Error handling and no data handling are managed the same way right now, errors should probably be managed by a dedicated error handler
 
-Some of the code that wasn't asked for isn't split out as nicely as it could be, i wanted to avoid having non asked for stuff in the main structure so it wouldn't confuse the brief and keep these as simply extra bits for ease of use
+Some of the code that wasn't asked for isn't split out as nicely as it could be, I wanted to avoid debug stuff in the main structure so it wouldn't confuse the brief and keep these as simply extra bits for ease of use
 
 Error handling of a bad artboard id is the same as document id, although perhaps they should just be sent to the document main page
 
-More tests, I got a bit carried away with features
+More tests
 
-The data normalisers and the data types should be in the same place probably...
+The data normalisers and the data types should be in the same place
